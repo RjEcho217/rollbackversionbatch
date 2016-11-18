@@ -1,0 +1,96 @@
+echo "** ** ** ** ** ** ** ** ** ** ** ** ** **"
+echo "*                                       *"
+echo "*                                       *"
+echo "* WARNING! This must be run under ROOT! *"
+echo "*                                       *"
+echo "*                                       *"
+echo "*                                       *"
+echo "*     Type pos, posdb or posmob         *" 
+echo "*                                       *"
+echo "*                                       *"
+echo "*    This Selects Image to Rollback     *"
+echo "*                                       *"
+echo "*                                       *"
+echo "*                                       *"
+echo "*                                       *"
+echo "*                                       *"
+echo "** ** ** ** ** ** ** ** ** ** ** ** ** **"
+echo
+echo
+echo
+echo
+
+#This is a ISS image rollback script for pos posdb and posmob - creating a CentProgress dir in each image folder and then moving the current active directory, and restarting
+# the vm. 
+
+echo -n "Hello "$USER". Please enter your selection (pos, posdb or posmob), followed by [ENTER]: "
+read  selection
+echo
+
+if [[ "$selection" == pos ]];then
+	echo "pos selected. Thank you"
+	
+elif [[ "$selection" == posdb ]];then
+	echo "pos selected. Thank you"
+	
+elif [[ "$selection" == posmob ]i];then
+	echo "Option 3 selected. Thank you"
+	
+else
+	echo " Please Type pos, posdb or posmob"
+	
+fi
+
+--------------------------------------------------------------------------
+Choice selection
+
+echo -n "Hello "$USER". Please enter your selection (1, 2 or 3), followed by [ENTER]: "
+read  selection
+echo
+
+if [[ "$selection" == 1 ]];then
+	echo "Option 1 selected. Thank you"
+elif [[ "$selection" == 2 ]];then
+	echo "Option 2 selected. Thank you"
+elif [[ "$selection" == 3 ]];then
+	echo "Option 3 selected. Thank you"
+else
+	echo " Please select options 1, 2 or 3"
+	exit 1
+fi
+
+
+Verify Contents
+
+
+ls /var/lib/kvm/images/pos /var/lib/kvm/images/pos/CentProgress /var/lib/kvm/images/posdb /var/lib/kvm/images/posdb/CentProgress /var/lib/kvm/images/posmob /var/lib/kvm/images/posmob/CentProgress 
+
+
+rollback
+
+pos
+
+mv /var/lib/kvm/images/pos/disk0.raw /var/lib/kvm/images/pos/CentProgress/disk0.raw.cent && mv /var/lib/kvm/images/pos/disk0.raw.bak /var/lib/kvm/images/pos/disk0.raw
+
+posmob
+
+mv /var/lib/kvm/images/posmob/disk0.raw /var/lib/kvm/images/posmob/CentProgress/disk0.raw.cent && mv /var/lib/kvm/images/posmob/disk0.raw.bak /var/lib/kvm/images/posmob/disk0.raw
+
+posdb
+
+mv /var/lib/kvm/images/posdb/disk0.raw /var/lib/kvm/images/posdb/CentProgress/disk0.raw.cent && mv /var/lib/kvm/images/posdb/disk0.raw.bak /var/lib/kvm/images/posdb/disk0.raw && mv /var/lib/kvm/images/posdb/disk1.raw /var/lib/kvm/images/posdb/CentProgress/disk1.raw.cent && mv /var/lib/kvm/images/posdb/disk1.raw.bak /var/lib/kvm/images/posdb/disk1.raw
+
+
+
+Rollback from Rollback - pos
+mv /var/lib/kvm/images/pos/disk0.raw /var/lib/kvm/images/pos/disk0.raw.bak && mv /var/lib/kvm/images/pos/CentProgress/disk0.raw.cent /var/lib/kvm/images/pos/disk0.raw
+
+posmob
+
+mv /var/lib/kvm/images/posmob/disk0.raw /var/lib/kvm/images/posmob/disk0.raw.bak && mv /var/lib/kvm/images/posmob/CentProgress/disk0.raw.cent /var/lib/kvm/images/posmob/disk0.raw
+
+posdb
+
+mv /var/lib/kvm/images/posdb/disk0.raw /var/lib/kvm/images/posdb/disk0.raw.bak && mv /var/lib/kvm/images/posdb/CentProgress/disk0.raw.cent /var/lib/kvm/images/posdb/disk0.raw && mv /var/lib/kvm/images/posdb/disk1.raw /var/lib/kvm/images/posdb/disk1.raw.bak && mv /var/lib/kvm/images/posdb/CentProgress/disk1.raw.cent /var/lib/kvm/images/posdb/disk1.raw
+
+
